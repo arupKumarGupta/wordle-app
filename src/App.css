@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+.wordle-container {
+	width: 100%;
+	height: 95vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	user-select: none;
+}
+.keyboard-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 600px;
+}
+.key {
+	display: grid;
+	place-items: center;
+	background-color: rgb(149, 149, 149);
+	cursor: pointer;
+	color: white;
+	min-width: 30px;
+	height: 40px;
+	margin: 2px;
+	padding: 5px;
+	border-radius: 3px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.word {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.letter {
+	display: grid;
+	place-items: center;
+	width: 60px;
+	height: 60px;
+	font-weight: bold;
+	font-size: 30px;
+	border: 1px solid lightgrey;
+	margin: 2px;
+}
+.green {
+	background-color: rgb(64, 174, 64);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.yellow {
+	background-color: rgb(222, 187, 48);
+}
+.darkgrey {
+	background-color: rgb(53, 55, 56);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media screen and (min-width: 600px) {
+	.key {
+		min-width: 40px;
+		height: 60px;
+		margin: 4px;
+		padding: 5px;
+		border-radius: 5px;
+		font-size: 20px;
+	}
 }
 
-.App-link {
-  color: #61dafb;
-}
+@media screen and (max-height: 500px) and (max-width: 500px) {
+	.key {
+		width: 20px;
+		height: 40px;
+		margin: 4px;
+		padding: 6px;
+		border-radius: 5px;
+		font-size: 20px;
+	}
+	.letter {
+		width: 40px;
+		height: 40px;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+		font-size: 20px;
+	}
 }
