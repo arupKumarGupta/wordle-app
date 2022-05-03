@@ -9,7 +9,10 @@ function getPlacement(current, placement) {
 	return placement;
 }
 const WordleProvider = ({ children }) => {
+	const maxAllowedGuesses = 6;
+	const [isGameOver, setIsGameOver] = useState(false);
 	const [currentGuess, setCurrentGuess] = useState('');
+
 	const [keyState, setKeyState] = useState(
 		keys
 			.flatMap((k) => k)
@@ -21,8 +24,16 @@ const WordleProvider = ({ children }) => {
 
 	const [guessesTillNow, setGuessesTillNow] = useState([]);
 
+	useEffect(() => {
+		if (guessesTillNow.length === maxAllowedGuesses) {
+			setIsGameOver(true);
+		}
+	}, [guessesTillNow, maxAllowedGuesses, setIsGameOver]);
 	const onKeyPressed = useCallback(
 		async (data) => {
+			if (isGameOver) {
+				return;
+			}
 			if (data.type === 'letter') {
 				setCurrentGuess((cW) => {
 					const newWord = cW + data.id.toUpperCase();
@@ -44,6 +55,7 @@ const WordleProvider = ({ children }) => {
 								return;
 							}
 							if (match) {
+								setIsGameOver(true);
 								console.log('MATCH!!!!');
 							}
 							setGuessesTillNow((guesses) => [
@@ -73,16 +85,24 @@ const WordleProvider = ({ children }) => {
 				}
 			}
 		},
-		[setGuessesTillNow, setCurrentGuess, currentGuess, setKeyState]
+		[
+			setGuessesTillNow,
+			setCurrentGuess,
+			currentGuess,
+			setKeyState,
+			isGameOver,
+			setIsGameOver,
+		]
 	);
 	const value = {
 		currentGuess,
 		setCurrentGuess,
 		guessesTillNow,
 		setGuessesTillNow,
-		maxAllowedGuesses: 6,
+		maxAllowedGuesses,
 		onKeyPressed,
 		keyState,
+		isGameOver,
 	};
 	return (
 		<WordleContext.Provider value={value}>

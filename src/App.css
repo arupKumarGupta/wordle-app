@@ -52,6 +52,26 @@
 	background-color: rgb(53, 55, 56);
 }
 
+.letter.green,
+.letter.yellow,
+.letter.darkgrey {
+	/* perspective: 1000px; */
+	animation: flip 0.5s ease-in;
+}
+
+@keyframes flip {
+	0% {
+		transform: scaleX(-1);
+	}
+
+	50% {
+		transform: scaleX(0);
+	}
+	100% {
+		transform: scaleX(1);
+	}
+}
+
 @media screen and (min-width: 600px) {
 	.key {
 		min-width: 40px;
